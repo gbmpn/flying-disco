@@ -67,8 +67,9 @@ export default function HomeClient({ albums }: Props) {
           onClick={() => {
             if (view === "grid") return;
             if ("startViewTransition" in document) {
-              // @ts-expect-error experimental API
-              document.startViewTransition(() => setView("grid"));
+              (document as Document & {
+                startViewTransition?: (cb: () => void) => void;
+              }).startViewTransition?.(() => setView("grid"));
             } else {
               setView("grid");
             }
@@ -86,8 +87,9 @@ export default function HomeClient({ albums }: Props) {
           onClick={() => {
             if (view === "fullscreen") return;
             if ("startViewTransition" in document) {
-              // @ts-expect-error experimental API
-              document.startViewTransition(() => setView("fullscreen"));
+              (document as Document & {
+                startViewTransition?: (cb: () => void) => void;
+              }).startViewTransition?.(() => setView("fullscreen"));
             } else {
               setView("fullscreen");
             }
