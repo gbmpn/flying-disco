@@ -32,7 +32,9 @@ export default function HomeClient({ albums }: Props) {
       const y = window.scrollY;
       const offset = Math.round(y * 0.25);
       const scale = 1.04 + Math.min(0.08, y * 0.00015);
+      const blur = Math.min(8, y * 0.01);
       heroImgRef.current.style.transform = `translate3d(0, ${offset}px, 0) scale(${scale})`;
+      heroImgRef.current.style.filter = `blur(${blur.toFixed(2)}px)`;
       rafId = requestAnimationFrame(onScroll);
     };
 
